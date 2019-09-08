@@ -40,7 +40,7 @@ body {
 .image {
   position: relative;
   left: 28%;
-  max-width: 500px;
+  max-width: 450px;
 }
 
 .choice {
@@ -53,3 +53,7 @@ body {
   background-color: rgb(216, 185, 107);
 }
 
+footer {
+  position: absolute;
+  bottom: 5px;
+}
