@@ -1,21 +1,29 @@
-//TIMER SHENANIGANS
-let t = 30
-let timer = setInterval(timeLeft, 1000);
-  function timeLeft(){
-    if (t !== 0) {
-      t--
+let t = 30; //global time variable
+const starttimer = function() { //calling starttimer() should give a timer
+  t = 30;
+  document.getElementById("timer").textContent = `Time remaining: ${t}`;
+  let timer = setInterval(timeLeft, 1000);
+    function timeLeft(){
+      if (t !== 0) {
+        t--;
+      document.getElementById("timer").textContent = `Time remaining: ${t}`;
+      } else {
+      timeup();
+      //Need to insert code to change HTML content to something from answers array
+      }
+      // console.log(t)
     }
-    // console.log(t)
-  }
-  function timeup(){
-    clearInterval(timer)
-  }
-  
+    function timeup(){
+      clearInterval(timer);
+    }
+}
+
+
 const questions = [ //global array of questions and choices
   qI = { //master sword
     Question: `In Breath of the Wild, where is the Master Sword found?`,
     choiceA: `The Lost Woods`,
-    choiceB:  `The Korok Forest`, //correct
+    choiceB: `The Korok Forest`, //correct
     choiceC: `Hyrule Castle`,
     choiceD: `The Temple of Time`
   },
@@ -75,16 +83,19 @@ const answers = [ //global array of answers and result text
     Timeout: `Out of time! The game allowed Link to carry 999 arrows of each type from the start of the game.`
   },
 ]
+
+
 let qIndex = 0 //global variable for questions
 let aIndex = 0 //global variable for answers
-const newQuestion = function(){ //new question function
+const newQuestion = function(){ //adds 1 to qIndex whenever called.
   //Timer reset?
-  document.getElementById('question').textContent =`${questions[qIndex].Question}`
-  document.getElementById('choiceA').textContent =`${questions[qIndex].choiceA}`
-  document.getElementById('choiceB').textContent =`${questions[qIndex].choiceB}`
-  document.getElementById('choiceC').textContent =`${questions[qIndex].choiceC}`
-  document.getElementById('choiceD').textContent =`${questions[qIndex].choiceD}`
-  qIndex++ 
+  qIndex++;
+  document.getElementById('question').textContent =`${questions[qIndex - 1].Question}`;
+  document.getElementById('choiceA').textContent =`${questions[qIndex - 1].choiceA}`;
+  document.getElementById('choiceB').textContent =`${questions[qIndex - 1].choiceB}`;
+  document.getElementById('choiceC').textContent =`${questions[qIndex - 1].choiceC}`;
+  document.getElementById('choiceD').textContent =`${questions[qIndex - 1].choiceD}`;
+  //LISTEN FOR CORRECT ANSWER
 }
 const newAnswer = function(){ //answer received function
   document.getElementById('choiceA').textContent =`` //clears out the answer choices
@@ -105,4 +116,12 @@ const newAnswer = function(){ //answer received function
 document.getElementById("start").addEventListener(`click`, function(){
   document.getElementById("container").removeChild(document.getElementById("start")) //kill start button
   newQuestion() //run new question
+  starttimer() //start the timer
 })
+
+
+//Checking data type stuff; called whenever one of the choices is clicked
+let check = function(choice){
+  let correctness = choice.getAttribute("data-choice");
+  console.log(correctness)
+}
