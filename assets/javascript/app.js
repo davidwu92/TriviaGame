@@ -62,7 +62,15 @@ const answers = [ //global array of answers and result text
     Timeout: `Out of time! The game allowed Link to carry 999 arrows of each type from the start of the game.`
   },
 ]
-let t = 10;
+const answerimages = [ //global array of answer image locations
+  "./assets/images/botwmastersword.jpg",
+  "./assets/images/botwleviathans.jpg",
+  "./assets/images/botwfire.png",
+  "./assets/images/botwsunsetfirefly.png",
+  "./assets/images/Hestu.gif"
+]
+
+let t = 20;
 let qIndex = 0; //global variable for questions array
 let aIndex = 0; //global variable for answers array
 let listening = false; //false if we're not listening for an answer choice, true if LISTENING
@@ -71,7 +79,7 @@ let score = 0;
 
 //timer defined (displays when listening)
 const starttimer = function() { //calling starttimer() should give a timer
-  t = 10;
+  t = 20;
   document.getElementById("timer").textContent = `Time remaining: ${t}`;
   let timer = setInterval(timeLeft, 1000);
     function timeLeft(){
@@ -100,16 +108,17 @@ const starttimer = function() { //calling starttimer() should give a timer
 const newQuestion = function(){
   listening = true;
   qIndex++;
-  if (qIndex < 6) {
+  if (qIndex < questions.length+1) {
     starttimer();
     dataChanger(); //changes the data-choice to correct or incorrect on each choice
+    document.getElementById('image').innerHTML = ``;
     document.getElementById('question').textContent =`${questions[qIndex - 1].Question}`;
     document.getElementById('choiceA').textContent =`${questions[qIndex - 1].choiceA}`;
     document.getElementById('choiceB').textContent =`${questions[qIndex - 1].choiceB}`;
     document.getElementById('choiceC').textContent =`${questions[qIndex - 1].choiceC}`;
     document.getElementById('choiceD').textContent =`${questions[qIndex - 1].choiceD}`;
-  } else if (qIndex === 6) {
-    results()
+  } else if (qIndex === questions.length+1) {
+    results();
   }
 }
 
@@ -120,7 +129,9 @@ const newAnswer = function(){
   document.getElementById('choiceA').textContent =``; //clears out the answer choices
   document.getElementById('choiceB').textContent =``;
   document.getElementById('choiceC').textContent =``;
-  document.getElementById('choiceD').textContent =``;
+  document.getElementById('choiceD').innerHTML = ``;
+  document.getElementById('image').innerHTML = `<img class="image" src="${answerimages[aIndex-1]}">`;
+  
   if (t===0) { //ran outta time
     document.getElementById('question').textContent =`${answers[aIndex -1].Timeout}`;
   }
@@ -140,7 +151,7 @@ const results = function() {
   document.getElementById('choiceA').textContent =`Correct answers: ${score}`; //clears out the answer choices
   document.getElementById('choiceB').textContent =`Missed questions: ${questions.length - score}`;
   document.getElementById('choiceC').textContent =`Score: ${score / questions.length * 100}%`;
-  document.getElementById('choiceD').textContent = 'Click HERE to try again';
+  document.getElementById('choiceD').textContent = 'Hit F5 to try again.';
 }
 
 //START BUTTON LISTENER
@@ -153,13 +164,13 @@ document.getElementById("start").addEventListener(`click`, function(){
 //LISTENING FOR CLICKS (works only if listening = true)
 document.addEventListener(`click`, event => {
   if (listening) { //checking if we're listening for an answer choice 
-    if (event.target.className === `content choice`){ //make sure something happens only if clicking on an answer choice
+    if (event.target.className === `content choice hoverable`){ //make sure something happens only if clicking on an answer choice
       if (event.target.getAttribute("data-choice") === "correct") {
-        alert("correct");
+        // alert("correct");
         yourChoice = true;
         newAnswer();
       } else if (event.target.getAttribute("data-choice") === "incorrect") {
-        alert("incorrect");
+        // alert("incorrect");
         yourChoice = false;
         newAnswer();
       }
