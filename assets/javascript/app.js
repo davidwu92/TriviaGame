@@ -70,7 +70,7 @@ const answerimages = [ //global array of answer image locations
   "./assets/images/Hestu.gif"
 ]
 
-let t = 20;
+let t = 10;
 let qIndex = 0; //global variable for questions array
 let aIndex = 0; //global variable for answers array
 let listening = false; //false if we're not listening for an answer choice, true if LISTENING
@@ -79,7 +79,7 @@ let score = 0;
 
 //timer defined (displays when listening)
 const starttimer = function() { //calling starttimer() should give a timer
-  t = 20;
+  t = 10;
   document.getElementById("timer").textContent = `Time remaining: ${t}`;
   let timer = setInterval(timeLeft, 1000);
     function timeLeft(){
@@ -93,6 +93,11 @@ const starttimer = function() { //calling starttimer() should give a timer
         document.getElementById("timer").textContent = `Time remaining: ${t}`;
         } else { //ran out of time
         document.getElementById("timer").textContent = ``
+          let x = document.getElementById("wrongAudio");
+              function playAudio(){
+                x.play();
+              }
+          playAudio()
         newAnswer();
         timeup();
         }
@@ -161,17 +166,27 @@ document.getElementById("start").addEventListener(`click`, function(){
   newQuestion() //run new question for the first time
 })
 
-//LISTENING FOR CLICKS (works only if listening = true)
+//TRIVIA QUESTION-ANSWERING (works only if listening = true)
 document.addEventListener(`click`, event => {
   if (listening) { //checking if we're listening for an answer choice 
     if (event.target.className === `content choice hoverable`){ //make sure something happens only if clicking on an answer choice
       if (event.target.getAttribute("data-choice") === "correct") {
         // alert("correct");
         yourChoice = true;
+          let x = document.getElementById("correctAudio");
+          function playAudio(){
+            x.play();
+          }
+        playAudio()
         newAnswer();
       } else if (event.target.getAttribute("data-choice") === "incorrect") {
         // alert("incorrect");
         yourChoice = false;
+          let x = document.getElementById("wrongAudio");
+            function playAudio(){
+              x.play();
+            }
+        playAudio()
         newAnswer();
       }
     }
