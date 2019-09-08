@@ -10,22 +10,23 @@
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-  <div class="container stuff" id="container">
+  <div class="container trivia" id="container">
     <div class="row">
-      <div class="col sm"> <!--TRIVIA TITLE-->
-        <h1>Zelda: Breath of the Wild Trivia</h1>
-      </div>
+      <div class="col s2"></div> <!--TRIVIA TITLE-->
+      <div class="col s8"><h3 class="title">Zelda: Breath of the Wild Trivia</h1> </div>
+      <div class="col s2"></div>
+      
     </div>
     <p id="timer"></p> <!--TIMER HERE-->
-    <button id="start">Start</button> <!--START BUTTON-->
+    <button class="startbtn waves-effect waves-light btn-large" id="start">Start</button> <!--START BUTTON-->
     <div class="row"> <!--Question-->
-      <h4 class="content" id="question"></h4>
+      <h4 class="content question" id="question"></h4>
     </div>
     <div class="row"> <!--Answer Choices-->
-      <h4 class="content choice" id="choiceA" data-choice=""></h4>
-      <h4 class="content choice" id="choiceB" data-choice=""></h4>
-      <h4 class="content choice" id="choiceC" data-choice=""></h4>
-      <h4 class="content choice" id="choiceD" data-choice=""></h4>
+      <h5 class="content choice hoverable" id="choiceA" data-choice=""></h5>
+      <h5 class="content choice hoverable" id="choiceB" data-choice=""></h5>
+      <h5 class="content choice hoverable" id="choiceC" data-choice=""></h5>
+      <h5 class="content choice hoverable" id="choiceD" data-choice=""></h5>
     </div>
   </div>
 
