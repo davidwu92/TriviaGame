@@ -71,17 +71,17 @@ const answerimages = [ //global array of answer image locations
 ]
 
 let t = 10;
-let qIndex = 0; //global variable for questions array
-let aIndex = 0; //global variable for answers array
-let listening = false; //false if we're not listening for an answer choice, true if LISTENING
+let qIndex = 0; //for counting thru questions array indices
+let aIndex = 0; //for counting thru answers array indices
+let listening = false; //false if not listening for an answer choice, true if LISTENING
 let yourChoice = false; //turns true when the selected choice is correct
 let score = 0;
 
 //timer defined (displays when listening)
 const starttimer = function() { //calling starttimer() should give a timer
-  t = 10;
+  t = 20;
   document.getElementById("timer").textContent = `Time remaining: ${t}`;
-  let timer = setInterval(timeLeft, 1000);
+  let timer = setInterval(timeLeft, 2000);
     function timeLeft(){
       if (listening === false) { //not listening for an answer
         document.getElementById("timer").textContent = ``
@@ -194,7 +194,7 @@ document.addEventListener(`click`, event => {
 })
 
 //CHANGES DATA ON ANSWER CHOICES BASED ON QUESTION # (qIndex)
-let dataChanger = function(){
+const dataChanger = function(){
   if (qIndex === 1) {
     document.getElementById('choiceA').setAttribute("data-choice", "incorrect")
     document.getElementById('choiceB').setAttribute("data-choice", "correct")
