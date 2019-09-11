@@ -81,7 +81,7 @@ let score = 0;
 const starttimer = function() { //calling starttimer() should give a timer
   t = 20;
   document.getElementById("timer").textContent = `Time remaining: ${t}`;
-  let timer = setInterval(timeLeft, 2000);
+  let timer = setInterval(timeLeft, 1000);
     function timeLeft(){
       if (listening === false) { //not listening for an answer
         document.getElementById("timer").textContent = ``
